@@ -224,7 +224,7 @@ Follow [human-eval-infilling](https://github.com/openai/human-eval-infilling).
 
 ```bash
 
-python  eval.py  --pred  SAFIM-api-dsc-6.7b-base.jsonl  --gt  api.csv
+python  eval.py  --pred  <file_name.jsonl>  --gt  api.csv
 
 ```
 
