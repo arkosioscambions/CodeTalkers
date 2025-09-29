@@ -95,6 +95,7 @@ python  generate.py  --model  qwen  --model_id <model_id> --dataset  api.csv
 ```bash
 git clone https://github.com/openai/human-eval-infilling.git
 cd human-eval-infilling
+pip install -e .
 python  ../generate.py  --model  dscoder  --model_id <model_id> --dataset  hei
 ```
 
