@@ -1,258 +1,175 @@
+# Lost in the Flow with Code Talkers: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks
 
-  
+This repository contains the artifacts and experiments for the paper **“Lost in the Flow with Code Talkers: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks.”**
 
-# Code Talkers Can’t Complete: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks
-
-  
-
-  
-
-This repository contains the artifacts and experiments for the paper **“Code Talkers Can’t Complete: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks.”**
-
-  
-
-  
-
-----------
-
-  
-
-  
-
-## 🔧 Requirements
-
-  
-
-  
+## Requirements
 
 Clone the repository and install dependencies:
 
-  
-
-  
-
 ```bash
-
-git  clone  https://github.com/arkosioscambions/CodeTalkers.git
-pip  install  -r  requirements.txt
-
+git clone https://github.com/arkosioscambions/CodeTalkers.git
+cd CodeTalkers
+pip install -r requirements.txt
 ```
 
-  
+## Reproduction Overview
 
-  
+`RQ1` and `RQ3` use the same benchmark generation and evaluation commands.
 
-----------
+- `RQ1` evaluates pretrained base and instruction-tuned models.
+- `RQ3` evaluates fine-tuned checkpoints produced from `Qwen2.5-Coder-7B` using the Magicoder pipeline.
+- `RQ2` is a separate behavioral analysis over generated outputs.
 
-  
+## Common Benchmark Workflow for RQ1 and RQ3
 
-  
+### 1. Generate model outputs
 
-## 🚀 Experiments
-
-  
-
-  
-
-To generate model responses for evaluation, run:
-
-  
-
-  
+Use the same generation command for both `RQ1` and `RQ3`:
 
 ```bash
-
-python  generate.py  --model <model_name> --dataset <dataset_name>
-
+python generate.py --model <qwen|dscoder> --model_id <model_id> --dataset <dataset_name>
 ```
 
-  
+`--model_id` can be a Hugging Face model ID or a local checkpoint path.
 
-  
+### 2. Example generation commands
 
-### Examples
-
-  
-
-  
-
--  **SAFIM**
-
-  
-
-```bash
-
-python  generate.py  --model  qwen  --model_id <model_id> --dataset  api.csv
-
-```
-
-  
-
--  **HumanEval-Infilling**
-
-  
+**HumanEval-Infilling**
 
 ```bash
 git clone https://github.com/openai/human-eval-infilling.git
 cd human-eval-infilling
 pip install -e .
-python  ../generate.py  --model  dscoder  --model_id <model_id> --dataset  hei
+python ../generate.py --model <qwen|dscoder> --model_id <model_id> --dataset hei
 ```
 
-  
+**ClassEval-LineInfilling**
 
--  **DS-1000 (Instruct)**
-
-  
+Dataset: [annachaaang/ClassEval-LineInfilling](https://huggingface.co/datasets/annachaaang/ClassEval-LineInfilling)
 
 ```bash
-
-python  generate.py  --model  qwen  --model_id <model_id> --dataset  ds-1000.csv  --fewshot_file  fewshot_ds1000.json
-
+python generate.py --model <qwen|dscoder> --model_id <model_id> --dataset annachaaang/ClassEval-LineInfilling
 ```
 
-> We run the fine-tuned model on Magicoder pipeline [Magicoder pipeline](https://chatgpt.com/c/68d03603-4258-8331-8eb7-d67a60171141#-magicoder-integration) to align with the chat template input.
+**ClassEval-Completion**
 
-  
-
--  **Other Benchmarks**
-
-	-  **BigCodeBench** → Follow [BigCodeBench](https://github.com/bigcode-project/bigcodebench).
-	-  **HumanEval(+) & MBPP(+)** → See [Magicoder experiments](https://github.com/ise-uiuc/magicoder/tree/main/experiments).
-
-  
-
-  
-
-----------
-
-  
-
-  
-
-## 🪄 Usage related to Magicoder
-
-  
-
-  
-
-We build on [Magicoder](https://github.com/ise-uiuc/magicoder) for subset sampling of the dataset OSS-Instruct-75k and Evol-Instruct-110k, instruction tuning, and generating the response for questions from the Instruct version of DS-1000.
-
-  
-
-The modifications are applied to achieve **custom fine-tuned checkpoints, data mixing, and DS-1000 integration** in our studies, in which the implementation details will be guided below.
-
-  
-
-  
-
-### Setup
-
-  
-
-  
+Dataset: [annachaaang/ClassEval-Completion](https://huggingface.co/datasets/annachaaang/ClassEval-Completion)
 
 ```bash
-bash  setup.sh
+python generate.py --model <qwen|dscoder> --model_id <model_id> --dataset annachaaang/ClassEval-Completion
 ```
 
-  
-
-  
-
-### Replicating Intermediate Models
-
-  
-
-  
-
-1. Generate subset datasets:
-
-  
+**DS-1000 (Instruct)**
 
 ```bash
-
-python  sample_magicoder_subsets.py
-
+python generate.py \
+  --model <qwen|dscoder> \
+  --model_id <model_id> \
+  --dataset ds-1000.csv \
+  --fewshot_file fewshot_ds1000.json
 ```
 
-  
+**Other benchmarks**
 
-2. Perform instruction tuning following [Magicoder README-DEV](https://github.com/ise-uiuc/magicoder/blob/main/README-DEV.md).
+- `SAFIM`: follow [SAFIM](https://github.com/gonglinyuan/safim)
+- `BigCodeBench`: follow [BigCodeBench](https://github.com/bigcode-project/bigcodebench)
+- `HumanEval(+)` and `MBPP(+)`: follow [Magicoder experiments](https://github.com/ise-uiuc/magicoder/tree/main/experiments)
 
-  
+### 3. Evaluate generated outputs
 
-  
-
-### Data Mixing Models
-
-  
-
-Similarly, perform instruction tuning following [Magicoder README-DEV](https://github.com/ise-uiuc/magicoder/blob/main/README-DEV.md) and change the `num_epoch` to 1.
-
-  
-
-Specifically, for sequential data mixing, update `datafile_paths` to `general_75k.jsonl` or `magicoder_oss_instruct_75k.jsonl` for whichever sequences needed (i.e., **Code-NL** or **NL-Code**), whereas for the **Mix** strategy, update `datafile_paths` with a merged JSONL of the two.
-
-  
-  
-
-  
-
-----------
-
-  
-
-  
-
-## 📊 Evaluation
-
-  
-
-  
-
--  **HumanEval-FIM**
-
-  
+**HumanEval-FIM**
 
 Follow [human-eval-infilling](https://github.com/openai/human-eval-infilling).
 
-  
-
--  **SAFIM**
-
-  
+**ClassEval-Completion**
 
 ```bash
-
-python  eval.py  --pred  <file_name.jsonl>  --gt  api.csv
-
+python evaluate_classeval_completion.py \
+  --completions filename.jsonl \
+  --output-dir ClassEval/output/ \
+  --per-task-timeout 5
 ```
 
-  
+**ClassEval-LineInfilling**
 
--  **DS-1000**
+```bash
+python evaluate_classeval_lineinfilling.py \
+  --pred filename.jsonl \
+  --output-csv ClassEval-LineInfilling-results.csv
+```
 
-  
+Use `--truncate-at "//"` if you want to ignore trailing comments before comparison.
 
-Use the [official DS-1000 repository](https://github.com/xlang-ai/DS-1000).
+**Other benchmark evaluators**
 
-  
+- `SAFIM`: follow [SAFIM](https://github.com/gonglinyuan/safim)
+- `DS-1000`: use the [official DS-1000 repository](https://github.com/xlang-ai/DS-1000)
+- `BigCodeBench`: use the [official implementation](https://github.com/bigcode-project/bigcodebench)
+- `HumanEval(+)` and `MBPP(+)`: use [Magicoder experiments](https://github.com/ise-uiuc/magicoder/tree/main/experiments)
 
-We adapt their `test_ds1000.py` script for our `codex002-answers.jsonl`.
+## RQ1: Pretrained and Instruction-Tuned Models
 
-  
+`RQ1` uses the common workflow above with pretrained base and instruction-tuned models.
 
--  **BigCodeBench**
+The experiments in this repository cover:
 
-  
+- `Qwen2.5-Coder`: `1.5B`, `7B`, `14B`, `32B`
+- `DeepSeek-Coder`: `1.3B`, `6.7B`, `33B`
 
-Follow the [official implementation](https://github.com/bigcode-project/bigcodebench).
+Use the corresponding base or instruct model as `--model_id`, then reuse the common generation and evaluation commands.
 
-  
+## RQ3: Fine-Tuned Qwen2.5-Coder-7B Checkpoints
 
--  **HumanEval(+) & MBPP(+)**
+`RQ3` reuses the same benchmark workflow as `RQ1`. The only difference is the model checkpoint passed to `--model_id`.
 
-  
+In `RQ3`, the evaluated model is a fine-tuned `Qwen2.5-Coder-7B` checkpoint produced with the Magicoder pipeline.
 
-Refer to [Magicoder experiments](https://github.com/ise-uiuc/magicoder/tree/main/experiments).
+### Setup
+
+```bash
+bash setup.sh
+```
+
+### Replicate intermediate checkpoints
+
+1. Generate subset datasets:
+
+```bash
+python sample_magicoder_subsets.py
+```
+
+2. Perform instruction tuning following [Magicoder README-DEV](https://github.com/ise-uiuc/magicoder/blob/main/README-DEV.md).
+
+### Evaluate fine-tuned checkpoints
+
+After the checkpoints are produced, reuse the common benchmark workflow and replace `--model_id` with the checkpoint path.
+
+Example:
+
+```bash
+python generate.py \
+  --model qwen \
+  --model_id /path/to/magicoder-checkpoint \
+  --dataset annachaaang/ClassEval-Completion
+```
+
+Then evaluate the generated file with the same evaluation command used in `RQ1`.
+
+## RQ2: Behavioral Metrics (Table 7)
+
+Generate the behavioral metrics reported in Table 7 as CSV and JSON:
+
+```bash
+python3 generate_rq2_table7.py
+```
+
+This writes:
+
+```text
+results/rq2_table7.csv
+results/rq2_table7.json
+```
+
+The script expects the raw benchmark artifacts listed in `MODEL_SPECS` inside `generate_rq2_table7.py`.
+
+If your local artifact layout is different, edit `MODEL_SPECS` in [generate_rq2_table7.py](generate_rq2_table7.py).
