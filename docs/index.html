@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeTalkers | Project Page</title>
+    <meta
+      name="description"
+      content="Project page for Lost in the Flow with Code Talkers: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top">CodeTalkers</a>
+      <nav class="topnav" aria-label="Primary">
+        <a href="#modes">Motivation</a>
+        <a href="#design">Design</a>
+        <a href="#results">Findings</a>
+        <a href="#behavior">Behavior</a>
+        <a href="#resources">Resources</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Paper companion page</p>
+          <h1>Lost in the Flow with Code Talkers</h1>
+          <p class="authors">
+            Chang Shi Ying, Chiok Yew Ho, Yichen Li, and Yintong Huo
+          </p>
+          <p class="lede">
+            Instruction tuning makes code models better at command-style interaction,
+            but the paper shows that the gain is not free: infilling degrades,
+            completion changes benchmark by benchmark, and generation behavior becomes
+            more verbose and less tightly bounded.
+          </p>
+          <div class="cta-row">
+            <a
+              class="button button-primary"
+              href="https://raw.githubusercontent.com/arkosioscambions/CodeTalkers/main/CodeTalker_TOSEM2026.pdf"
+              target="_blank"
+              rel="noreferrer"
+              >Paper PDF</a
+            >
+            <a
+              class="button button-secondary"
+              href="https://github.com/arkosioscambions/CodeTalkers"
+              target="_blank"
+              rel="noreferrer"
+              >Code</a
+            >
+            <a class="button button-ghost" href="#results">Results</a>
+            <a class="button button-ghost" href="#citation">Citation</a>
+          </div>
+          <ul class="stat-strip" aria-label="Project at a glance">
+            <li>2 model families</li>
+            <li>3 task categories</li>
+            <li>7 findings</li>
+            <li>25-page manuscript</li>
+          </ul>
+        </div>
+
+        <aside class="hero-panel">
+          <article class="signal-card">
+            <span class="signal-tag">Flow mode</span>
+            <h2>Completion and infilling inside unfinished code</h2>
+            <p>
+              The paper treats localized continuation as a distinct cognitive mode
+              where developers expect short, bounded, structure-aware suggestions.
+            </p>
+          </article>
+          <article class="signal-card">
+            <span class="signal-tag">Command mode</span>
+            <h2>Natural-language intent to executable code</h2>
+            <p>
+              Instruction tuning is designed for this setting, where the model must
+              infer and follow developer intent expressed in natural language.
+            </p>
+          </article>
+          <article class="signal-card accent-card">
+            <span class="signal-tag">Main claim</span>
+            <h2>The Instruction-Tuning Tax</h2>
+            <p>
+              Instruction tuning reallocates capability. It helps some task modes,
+              but it can weaken infilling and alter generation behavior in ways that
+              matter for real coding assistants.
+            </p>
+          </article>
+        </aside>
+      </section>
+
+      <section id="modes" class="section reveal">
+        <div class="section-head">
+          <p class="eyebrow">Motivation</p>
+          <h2>Programming has two cognitive modes</h2>
+          <p>
+            The paper argues that code assistants serve developers in two different
+            ways, and those modes demand different model behavior.
+          </p>
+        </div>
+        <div class="mode-grid">
+          <article class="mode-card">
+            <div class="mode-label">Flow</div>
+            <h3>Stay inside the code and keep momentum</h3>
+            <p>
+              Developers are extending an existing thought process. They need code
+              completion or fill-in-the-middle suggestions that respect the local
+              prefix, suffix, and surrounding structure.
+            </p>
+            <ul>
+              <li>Code completion</li>
+              <li>Fill-in-the-middle infilling</li>
+              <li>Short, bounded, syntax-aware continuations</li>
+            </ul>
+          </article>
+          <article class="mode-card">
+            <div class="mode-label">Command</div>
+            <h3>Step back and describe intent in natural language</h3>
+            <p>
+              Developers articulate what they want. The model should understand the
+              instruction and synthesize code that follows the described goal or
+              specification.
+            </p>
+            <ul>
+              <li>Instruction following</li>
+              <li>Natural-language to code generation</li>
+              <li>Preference alignment and assistant-like behavior</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="design" class="section reveal">
+        <div class="section-head">
+          <p class="eyebrow">Study design</p>
+          <h2>What the paper evaluates</h2>
+          <p>
+            The study compares matched base and instruct models, then combines
+            benchmark performance, failure analysis, and checkpoint evolution to
+            understand what instruction tuning changes.
+          </p>
+        </div>
+        <div class="design-grid">
+          <article class="design-card">
+            <h3>Model families</h3>
+            <p>Two open-source CodeLLM families with matched base and instruct variants.</p>
+            <ul class="chip-list">
+              <li>Qwen2.5-Coder: 1.5B, 7B, 14B, 32B</li>
+              <li>DeepSeek-Coder: 1.3B, 6.7B, 33B</li>
+            </ul>
+          </article>
+          <article class="design-card">
+            <h3>Task categories</h3>
+            <p>
+              Flow-mode tasks emphasize local structure, while command-mode tasks
+              emphasize instruction understanding.
+            </p>
+            <ul class="chip-list">
+              <li>Infilling: HEFIM, SAFIM, ClassEval-LineInfilling</li>
+              <li>Completion: ClassEval-Completion, BigCodeBench-Complete</li>
+              <li>Instruction following: DS-1000, HumanEval, MBPP, BigCodeBench-Instruct</li>
+            </ul>
+          </article>
+          <article class="design-card">
+            <h3>Research questions</h3>
+            <p>The paper moves from headline performance into causes and evolution.</p>
+            <ol>
+              <li>RQ1: How do base and instruct models differ on representative tasks?</li>
+              <li>RQ2: What behavioral shifts explain those differences?</li>
+              <li>RQ3: How do capabilities change over the tuning trajectory?</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section id="results" class="section reveal">
+        <div class="section-head">
+          <p class="eyebrow">Findings</p>
+          <h2>What the paper argues</h2>
+          <p>
+            The results are not simply "base bad, instruct good" or the reverse.
+            The paper shows a task-dependent capability trade-off and treats it as a
+            deployment problem, not just a leaderboard result.
+          </p>
+        </div>
+        <div class="findings-grid">
+          <article class="finding-card">
+            <span class="finding-index">01</span>
+            <h3>Infilling shows the tax most clearly</h3>
+            <p>
+              Base models retain stronger fill-in-the-middle behavior, and the loss
+              after instruction tuning appears consistently across representative
+              infilling settings.
+            </p>
+          </article>
+          <article class="finding-card">
+            <span class="finding-index">02</span>
+            <h3>Completion often rises, but not uniformly</h3>
+            <p>
+              Instruct models often benefit from guidance-heavy or docstring-shaped
+              completion tasks, but the gain depends on the benchmark and weakens in
+              later tuning stages.
+            </p>
+          </article>
+          <article class="finding-card">
+            <span class="finding-index">03</span>
+            <h3>Instruction following improves most clearly</h3>
+            <p>
+              The command-mode upside is real. Later tuning stages strengthen
+              instruction-oriented behavior even when they do not uniformly improve
+              other forms of code generation.
+            </p>
+          </article>
+          <article class="finding-card">
+            <span class="finding-index">04</span>
+            <h3>Capability is reallocated, not uniformly improved</h3>
+            <p>
+              The paper's conclusion is that instruction tuning is not a free lunch.
+              It shifts model strengths across task types rather than simply making
+              code models better at everything.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="behavior" class="section reveal">
+        <div class="section-head">
+          <p class="eyebrow">RQ2</p>
+          <h2>Behavior shifts, not just benchmark scores</h2>
+          <p>
+            The manuscript's second contribution is a fidelity-oriented view of
+            generated code. The page below summarizes the weighted RQ2 metrics
+            generated from the repository artifacts.
+          </p>
+        </div>
+        <div class="metric-key">
+          <div><strong>CTR</strong> Higher is better. More tokens look like code.</div>
+          <div><strong>NL</strong> Lower is better. Less natural-language leakage.</div>
+          <div><strong>Def/Cls</strong> Lower is better. Fewer unnecessary extra declarations.</div>
+        </div>
+        <div id="behavior-grid" class="metric-grid" aria-live="polite"></div>
+        <p class="note">
+          These deltas are computed from the RQ2 weighted metrics produced by
+          <code>generate_rq2_table7.py</code>. They compare the average shift from
+          base to instruct models within each family.
+        </p>
+      </section>
+
+      <section id="trajectory" class="section reveal">
+        <div class="section-head">
+          <p class="eyebrow">RQ3</p>
+          <h2>Tuning reallocates capability over time</h2>
+          <p>
+            The checkpoint analysis in the manuscript shows that capability changes
+            are non-monotonic. Instruction following rises, infilling slips, and
+            completion stays positive on average but loses momentum in later stages.
+          </p>
+        </div>
+        <div id="stage-grid" class="stage-grid" aria-live="polite"></div>
+        <p class="note">
+          Stage-level grouped averages are taken from Table 9 of the manuscript:
+          Base, 75k, and 110k stages of the replicated Magicoder tuning process.
+        </p>
+      </section>
+
+      <section id="implications" class="section reveal">
+        <div class="section-head">
+          <p class="eyebrow">Discussion</p>
+          <h2>Why the paper matters</h2>
+          <p>
+            The takeaway is not only about accuracy. It is about how coding
+            assistants should be trained, selected, and safeguarded for different
+            developer workflows.
+          </p>
+        </div>
+        <div class="implication-grid">
+          <article class="implication-card">
+            <h3>For researchers</h3>
+            <ul>
+              <li>Instruction-tuning tax appears model-specific, not universal.</li>
+              <li>
+                Future post-training should preserve concise, boundary-aware
+                continuation for flow-mode tasks.
+              </li>
+              <li>
+                Behavior metrics matter because the trade-off is visible in how
+                models fail, not only in whether they pass.
+              </li>
+            </ul>
+          </article>
+          <article class="implication-card">
+            <h3>For practitioners</h3>
+            <ul>
+              <li>Do not choose models only from aggregate benchmark scores.</li>
+              <li>
+                Deployment safeguards should target dominant failure modes such as
+                verbosity, NL leakage, or extra code.
+              </li>
+              <li>
+                Routing flow-mode and command-mode tasks may be better than treating
+                "instruct" as a universal upgrade.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="resources" class="section reveal">
+        <div class="section-head">
+          <p class="eyebrow">Resources</p>
+          <h2>Paper, code, and deployment</h2>
+          <p>
+            This page is structured for GitHub Pages. The simplest deployment path is
+            to publish the repository's <code>docs/</code> folder from the
+            <code>main</code> branch.
+          </p>
+        </div>
+        <div class="resource-grid">
+          <article class="resource-card">
+            <h3>Links</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://raw.githubusercontent.com/arkosioscambions/CodeTalkers/main/CodeTalker_TOSEM2026.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Open the manuscript PDF</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/arkosioscambions/CodeTalkers"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Browse the repository</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/arkosioscambions/CodeTalkers/blob/main/results/rq2_table7.json"
+                  target="_blank"
+                  rel="noreferrer"
+                  >RQ2 behavioral metrics</a
+                >
+              </li>
+            </ul>
+          </article>
+          <article class="resource-card" id="citation">
+            <h3>Citation</h3>
+            <pre><code>@article{chang2026codetalkers,
+  title   = {Lost in the Flow with Code Talkers: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks},
+  author  = {Chang Shi Ying and Chiok Yew Ho and Yichen Li and Yintong Huo},
+  journal = {Manuscript submitted to ACM},
+  year    = {2026}
+}</code></pre>
+          </article>
+          <article class="resource-card">
+            <h3>GitHub Pages setup</h3>
+            <ol>
+              <li>Push this <code>docs/</code> folder to the repository.</li>
+              <li>Open GitHub repository settings.</li>
+              <li>Select <code>Pages</code>.</li>
+              <li>Deploy from branch: <code>main</code> / <code>docs</code>.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Built as a no-build static site for GitHub Pages, centered on the manuscript
+        rather than the reproduction scripts.
+      </p>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

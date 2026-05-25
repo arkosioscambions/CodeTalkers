@@ -1,0 +1,899 @@
+{
+  "metadata": {
+    "generated_by": "CodeTalkers/generate_rq2_table7.py",
+    "workspace_root": "/mnt/raid1/mzyu/3090_files/csy",
+    "description": "RQ2 Table 7 weighted behavioral metrics with failure-conditioned values.",
+    "infilling_overall_source": "Computed from raw infilling benchmark outputs using the same weights as Table 7.",
+    "weights": {
+      "hefim": 1033,
+      "safim_block": 8780,
+      "safim_control": 8630,
+      "safim_api": 310,
+      "safim_total": 17720,
+      "classeval_infilling": 2557,
+      "classeval_completion": 396,
+      "bigcodebench_complete": 1140
+    },
+    "failure_cases": [
+      "empty_completion",
+      "comment_only_output",
+      "low_code_token_ratio",
+      "markdown_fence_or_heading_or_bullet",
+      "natural_language_markers",
+      "extra_def_or_class",
+      "special_tokens"
+    ],
+    "code_token_ratio_threshold": 0.4,
+    "bigcodebench_text_field": "raw_solution"
+  },
+  "rows": [
+    {
+      "family_key": "qwen",
+      "family": "Qwen2.5-Coder",
+      "model": "1.5B",
+      "size_key": "1.5b",
+      "variant": "base",
+      "sources": {
+        "hefim": "fidelity/HEFIM/qwen/re_samples_base-1.5b.jsonl",
+        "safim_block": "fidelity/safim-block/qwen/Qwen2.5-Coder-1.5B-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/qwen/Qwen2.5-Coder-1.5B-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/qwen/api_generate_samples_base1.5b_all.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/qwen/qwen1.5base_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/qwen-0.25/Qwen2.5-Coder-1.5B_ClassEval-Completion_3rd.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/qwen/Qwen--Qwen2.5-Coder-1.5B--main--bigcodebench-complete--hf-0-1-sanitized_calibrated (2).jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.9018321993223344,
+          "failure_only": 0.38440815888394453,
+          "overall_pct": 90.18,
+          "failure_only_pct": 38.44,
+          "table7": "90.18 (38.44)"
+        },
+        "nl": {
+          "overall": 0.006569697034856641,
+          "failure_only": 0.02215785307624695,
+          "overall_pct": 0.66,
+          "failure_only_pct": 2.22,
+          "table7": "0.66 (2.22)"
+        },
+        "defcls": {
+          "overall": 0.02097615505597038,
+          "failure_only": 0.10085922908790519,
+          "overall_pct": 2.1,
+          "failure_only_pct": 10.09,
+          "table7": "2.10 (10.09)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.8445867118701958,
+          "failure_only": 0.5228687255027551,
+          "overall_pct": 84.46,
+          "failure_only_pct": 52.29,
+          "table7": "84.46 (52.29)"
+        },
+        "nl": {
+          "overall": 0.08463541666666667,
+          "failure_only": 0.20549242424242423,
+          "overall_pct": 8.46,
+          "failure_only_pct": 20.55,
+          "table7": "8.46 (20.55)"
+        },
+        "defcls": {
+          "overall": 0.027994791666666668,
+          "failure_only": 0.08164654356060606,
+          "overall_pct": 2.8,
+          "failure_only_pct": 8.16,
+          "table7": "2.80 (8.16)"
+        }
+      }
+    },
+    {
+      "family_key": "qwen",
+      "family": "Qwen2.5-Coder",
+      "model": "7B",
+      "size_key": "7b",
+      "variant": "base",
+      "sources": {
+        "hefim": "fidelity/HEFIM/qwen/re_samples_base-7B.jsonl",
+        "safim_block": "fidelity/safim-block/qwen/Qwen2.5-Coder-7B-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/qwen/Qwen2.5-Coder-7B-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/qwen/api_generate_samples_base7b_all.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/qwen/qwen7bbase_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/qwen-0.25/Qwen2.5-Coder-7B_ClassEval-Completion-2nd.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/qwen/Qwen--Qwen2.5-Coder-7B--main--bigcodebench-complete--hf-0-1-sanitized_calibrated.jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.9293101275746974,
+          "failure_only": 0.12709001775419546,
+          "overall_pct": 92.93,
+          "failure_only_pct": 12.71,
+          "table7": "92.93 (12.71)"
+        },
+        "nl": {
+          "overall": 0.0015954956375517418,
+          "failure_only": 0.02337310288860069,
+          "overall_pct": 0.16,
+          "failure_only_pct": 2.34,
+          "table7": "0.16 (2.34)"
+        },
+        "defcls": {
+          "overall": 0.005584276260266052,
+          "failure_only": 0.07596509726713521,
+          "overall_pct": 0.56,
+          "failure_only_pct": 7.6,
+          "table7": "0.56 (7.60)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.8963437740955179,
+          "failure_only": 0.7038272965719911,
+          "overall_pct": 89.63,
+          "failure_only_pct": 70.38,
+          "table7": "89.63 (70.38)"
+        },
+        "nl": {
+          "overall": 0.08528645833333333,
+          "failure_only": 0.2401503334767642,
+          "overall_pct": 8.53,
+          "failure_only_pct": 24.02,
+          "table7": "8.53 (24.02)"
+        },
+        "defcls": {
+          "overall": 0.029296875,
+          "failure_only": 0.10972579920522425,
+          "overall_pct": 2.93,
+          "failure_only_pct": 10.97,
+          "table7": "2.93 (10.97)"
+        }
+      }
+    },
+    {
+      "family_key": "qwen",
+      "family": "Qwen2.5-Coder",
+      "model": "14B",
+      "size_key": "14b",
+      "variant": "base",
+      "sources": {
+        "hefim": "fidelity/HEFIM/qwen/he-qwen-base-14B.jsonl",
+        "safim_block": "fidelity/safim-block/qwen/Qwen2.5-Coder-14B-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/qwen/Qwen2.5-Coder-14B-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/qwen/api_generate_samples_base14b_all.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/qwen/Qwen2.5-Coder-14B_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/qwen-0.25/Qwen2.5-Coder-14B-ClassEval-Completion-0.25-2nd.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/qwen/Qwen--Qwen2.5-Coder-14B--main--bigcodebench-complete--hf-0-1-sanitized_calibrated (1).jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.9696118115761901,
+          "failure_only": 0.11148315388381116,
+          "overall_pct": 96.96,
+          "failure_only_pct": 11.15,
+          "table7": "96.96 (11.15)"
+        },
+        "nl": {
+          "overall": 0.002627687383081856,
+          "failure_only": 0.07742176244580931,
+          "overall_pct": 0.26,
+          "failure_only_pct": 7.74,
+          "table7": "0.26 (7.74)"
+        },
+        "defcls": {
+          "overall": 0.001032373820636051,
+          "failure_only": 0.032300193328085876,
+          "overall_pct": 0.1,
+          "failure_only_pct": 3.23,
+          "table7": "0.10 (3.23)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.93965673418001,
+          "failure_only": 0.908769733018071,
+          "overall_pct": 93.97,
+          "failure_only_pct": 90.88,
+          "table7": "93.97 (90.88)"
+        },
+        "nl": {
+          "overall": 0.054036458333333336,
+          "failure_only": 0.16006656858471377,
+          "overall_pct": 5.4,
+          "failure_only_pct": 16.01,
+          "table7": "5.40 (16.01)"
+        },
+        "defcls": {
+          "overall": 0.07486979166666667,
+          "failure_only": 0.18654869587329267,
+          "overall_pct": 7.49,
+          "failure_only_pct": 18.65,
+          "table7": "7.49 (18.65)"
+        }
+      }
+    },
+    {
+      "family_key": "qwen",
+      "family": "Qwen2.5-Coder",
+      "model": "32B",
+      "size_key": "32b",
+      "variant": "base",
+      "sources": {
+        "hefim": "fidelity/HEFIM/qwen/he-qwen-base-32B.jsonl",
+        "safim_block": "fidelity/safim-block/qwen/Qwen2.5-Coder-32B-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/qwen/Qwen2.5-Coder-32B-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/qwen/api_generate_samples_qwenbase32b.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/qwen/Qwen2.5-Coder-32B_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/qwen-0.25/Qwen2.5-Coder-32B-ClassEval-Completion-0.25-pass1.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/qwen/Qwen--Qwen2.5-Coder-32B--main--bigcodebench-complete--hf-0-1-sanitized_calibrated (1).jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.9708233820811107,
+          "failure_only": 0.09903313845295499,
+          "overall_pct": 97.08,
+          "failure_only_pct": 9.9,
+          "table7": "97.08 (9.90)"
+        },
+        "nl": {
+          "overall": 0.0014546788754742173,
+          "failure_only": 0.070395717483447,
+          "overall_pct": 0.15,
+          "failure_only_pct": 7.04,
+          "table7": "0.15 (7.04)"
+        },
+        "defcls": {
+          "overall": 0.0011731581417175035,
+          "failure_only": 0.040102305406153366,
+          "overall_pct": 0.12,
+          "failure_only_pct": 4.01,
+          "table7": "0.12 (4.01)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.897493911291575,
+          "failure_only": 0.8079228017158394,
+          "overall_pct": 89.75,
+          "failure_only_pct": 80.79,
+          "table7": "89.75 (80.79)"
+        },
+        "nl": {
+          "overall": 0.029296875,
+          "failure_only": 0.14392248376623376,
+          "overall_pct": 2.93,
+          "failure_only_pct": 14.39,
+          "table7": "2.93 (14.39)"
+        },
+        "defcls": {
+          "overall": 0.043619791666666664,
+          "failure_only": 0.1697037337662338,
+          "overall_pct": 4.36,
+          "failure_only_pct": 16.97,
+          "table7": "4.36 (16.97)"
+        }
+      }
+    },
+    {
+      "family_key": "qwen",
+      "family": "Qwen2.5-Coder",
+      "model": "1.5B-Instruct",
+      "size_key": "1.5b",
+      "variant": "instruct",
+      "sources": {
+        "hefim": "fidelity/HEFIM/qwen/re_samples_instruct-1.5b.jsonl",
+        "safim_block": "fidelity/safim-block/qwen/Qwen2.5-Coder-1.5B-Instruct-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/qwen/Qwen2.5-Coder-1.5B-Instruct-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/qwen/api_generate_samples_instruct1.5b_all.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/qwen/qwen1.5binstruct_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/qwen-0.25/Qwen2.5-Coder-1.5B-Instruct_ClassEval-Completion_1st.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/qwen/Qwen--Qwen2.5-Coder-1.5B-Instruct--main--bigcodebench-complete--hf-0-1-sanitized_calibrated.jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.8974035328264564,
+          "failure_only": 0.07334271054878215,
+          "overall_pct": 89.74,
+          "failure_only_pct": 7.33,
+          "table7": "89.74 (7.33)"
+        },
+        "nl": {
+          "overall": 0.004551805587321733,
+          "failure_only": 0.031966484977068194,
+          "overall_pct": 0.46,
+          "failure_only_pct": 3.2,
+          "table7": "0.46 (3.20)"
+        },
+        "defcls": {
+          "overall": 0.01647109755711093,
+          "failure_only": 0.07264313990205981,
+          "overall_pct": 1.65,
+          "failure_only_pct": 7.26,
+          "table7": "1.65 (7.26)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.8650745748513918,
+          "failure_only": 0.7886959832685402,
+          "overall_pct": 86.51,
+          "failure_only_pct": 78.87,
+          "table7": "86.51 (78.87)"
+        },
+        "nl": {
+          "overall": 0.08203125,
+          "failure_only": 0.126133631993007,
+          "overall_pct": 8.2,
+          "failure_only_pct": 12.61,
+          "table7": "8.20 (12.61)"
+        },
+        "defcls": {
+          "overall": 0.091796875,
+          "failure_only": 0.14057101752414253,
+          "overall_pct": 9.18,
+          "failure_only_pct": 14.06,
+          "table7": "9.18 (14.06)"
+        }
+      }
+    },
+    {
+      "family_key": "qwen",
+      "family": "Qwen2.5-Coder",
+      "model": "7B-Instruct",
+      "size_key": "7b",
+      "variant": "instruct",
+      "sources": {
+        "hefim": "fidelity/HEFIM/qwen/re_samples_instruct-7B.jsonl",
+        "safim_block": "fidelity/safim-block/qwen/Qwen2.5-Coder-7B-Instruct-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/qwen/Qwen2.5-Coder-7B-Instruct-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/qwen/api_generate_samples_instruct7b_all.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/qwen/qwen7binstruct_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/qwen-0.25/Qwen2.5-Coder-7B-Instruct_ClassEval-Completion-1st.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/qwen/Qwen--Qwen2.5-Coder-7B-Instruct--main--bigcodebench-complete--hf-0-1-sanitized_calibrated.jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.8872437586458303,
+          "failure_only": 0.16494429830770063,
+          "overall_pct": 88.72,
+          "failure_only_pct": 16.49,
+          "table7": "88.72 (16.49)"
+        },
+        "nl": {
+          "overall": 0.02496289958597546,
+          "failure_only": 0.15392552253247488,
+          "overall_pct": 2.5,
+          "failure_only_pct": 15.39,
+          "table7": "2.50 (15.39)"
+        },
+        "defcls": {
+          "overall": 0.027029504800342406,
+          "failure_only": 0.10369379453125291,
+          "overall_pct": 2.7,
+          "failure_only_pct": 10.37,
+          "table7": "2.70 (10.37)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.8903180688283618,
+          "failure_only": 0.7860265258162821,
+          "overall_pct": 89.03,
+          "failure_only_pct": 78.6,
+          "table7": "89.03 (78.60)"
+        },
+        "nl": {
+          "overall": 0.09309895833333333,
+          "failure_only": 0.13177412384339868,
+          "overall_pct": 9.31,
+          "failure_only_pct": 13.18,
+          "table7": "9.31 (13.18)"
+        },
+        "defcls": {
+          "overall": 0.08268229166666667,
+          "failure_only": 0.15004345027857927,
+          "overall_pct": 8.27,
+          "failure_only_pct": 15.0,
+          "table7": "8.27 (15.00)"
+        }
+      }
+    },
+    {
+      "family_key": "qwen",
+      "family": "Qwen2.5-Coder",
+      "model": "14B-Instruct",
+      "size_key": "14b",
+      "variant": "instruct",
+      "sources": {
+        "hefim": "fidelity/HEFIM/qwen/he-qwen-instruct-14B.jsonl",
+        "safim_block": "fidelity/safim-block/qwen/Qwen2.5-Coder-14B-Instruct-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/qwen/Qwen2.5-Coder-14B-Instruct-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/qwen/api_generate_samples_instruct_14b_all.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/qwen/Qwen2.5-Coder-14B-Instruct_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/qwen-0.25/Qwen2.5-Coder-14B-Instruct-ClassEval-Completion-0.25-pass1.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/qwen/Qwen--Qwen2.5-Coder-14B-Instruct--main--bigcodebench-complete--hf-0-1-sanitized_calibrated (1).jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.917824428724163,
+          "failure_only": 0.20496349427406751,
+          "overall_pct": 91.78,
+          "failure_only_pct": 20.5,
+          "table7": "91.78 (20.50)"
+        },
+        "nl": {
+          "overall": 0.02684036918986902,
+          "failure_only": 0.24974289206130695,
+          "overall_pct": 2.68,
+          "failure_only_pct": 24.97,
+          "table7": "2.68 (24.97)"
+        },
+        "defcls": {
+          "overall": 0.014734834195519731,
+          "failure_only": 0.09011366169758338,
+          "overall_pct": 1.47,
+          "failure_only_pct": 9.01,
+          "table7": "1.47 (9.01)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.9072882368536135,
+          "failure_only": 0.7506943045590716,
+          "overall_pct": 90.73,
+          "failure_only_pct": 75.07,
+          "table7": "90.73 (75.07)"
+        },
+        "nl": {
+          "overall": 0.061197916666666664,
+          "failure_only": 0.0762614627849003,
+          "overall_pct": 6.12,
+          "failure_only_pct": 7.63,
+          "table7": "6.12 (7.63)"
+        },
+        "defcls": {
+          "overall": 0.027343749999999997,
+          "failure_only": 0.03534265936609687,
+          "overall_pct": 2.73,
+          "failure_only_pct": 3.53,
+          "table7": "2.73 (3.53)"
+        }
+      }
+    },
+    {
+      "family_key": "qwen",
+      "family": "Qwen2.5-Coder",
+      "model": "32B-Instruct",
+      "size_key": "32b",
+      "variant": "instruct",
+      "sources": {
+        "hefim": "fidelity/HEFIM/qwen/he-qwen-instruct-32B.jsonl",
+        "safim_block": "fidelity/safim-block/qwen/Qwen2.5-Coder-32B-Instruct-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/qwen/Qwen2.5-Coder-32B-Instruct-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/qwen/api_generate_samples_qweninstruct32b.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/qwen/Qwen2.5-Coder-32B-Instruct_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/qwen-0.25/Qwen2.5-Coder-32B-Instruct-ClassEval-Completion-0.25-2nd.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/qwen/Qwen--Qwen2.5-Coder-32B-Instruct--main--bigcodebench-complete--hf-0-1-sanitized_calibrated (1).jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.8947820985092224,
+          "failure_only": 0.16653133223217617,
+          "overall_pct": 89.48,
+          "failure_only_pct": 16.65,
+          "table7": "89.48 (16.65)"
+        },
+        "nl": {
+          "overall": 0.022710938506908997,
+          "failure_only": 0.1751873663899159,
+          "overall_pct": 2.27,
+          "failure_only_pct": 17.52,
+          "table7": "2.27 (17.52)"
+        },
+        "defcls": {
+          "overall": 0.011403130425714112,
+          "failure_only": 0.09289443062965362,
+          "overall_pct": 1.14,
+          "failure_only_pct": 9.29,
+          "table7": "1.14 (9.29)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.8620835059189433,
+          "failure_only": 0.7719176657461588,
+          "overall_pct": 86.21,
+          "failure_only_pct": 77.19,
+          "table7": "86.21 (77.19)"
+        },
+        "nl": {
+          "overall": 0.13997395833333334,
+          "failure_only": 0.17329783194892143,
+          "overall_pct": 14.0,
+          "failure_only_pct": 17.33,
+          "table7": "14.00 (17.33)"
+        },
+        "defcls": {
+          "overall": 0.09830729166666667,
+          "failure_only": 0.15518166532358046,
+          "overall_pct": 9.83,
+          "failure_only_pct": 15.52,
+          "table7": "9.83 (15.52)"
+        }
+      }
+    },
+    {
+      "family_key": "dscoder",
+      "family": "DeepSeek-Coder",
+      "model": "1.3B",
+      "size_key": "1.3b",
+      "variant": "base",
+      "sources": {
+        "hefim": "fidelity/HEFIM/dscoder/HEFIM-dsc-1.3b-base-trimmed-before-hash-from.jsonl",
+        "safim_block": "fidelity/safim-block/dscoder/deepseek-coder-1.3b-base-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/dscoder/deepseek-coder-1.3b-base-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/dscoder/SAFIM-api-dsc-1.3b-base.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/dscoder/dscoder1.3bbase_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/dscoder-0.1/deepseek-coder-1.3b-base-ClassEval-Completion-changedpromptv4.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/dscoder/deepseek-ai--deepseek-coder-1.3b-base--main--bigcodebench-complete--hf-0-1-sanitized_calibrated.jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.9063169386880459,
+          "failure_only": 0.03766733705928641,
+          "overall_pct": 90.63,
+          "failure_only_pct": 3.77,
+          "table7": "90.63 (3.77)"
+        },
+        "nl": {
+          "overall": 0.001360852850377589,
+          "failure_only": 0.02107833058851758,
+          "overall_pct": 0.14,
+          "failure_only_pct": 2.11,
+          "table7": "0.14 (2.11)"
+        },
+        "defcls": {
+          "overall": 0.014077860292082574,
+          "failure_only": 0.08122570055033297,
+          "overall_pct": 1.41,
+          "failure_only_pct": 8.12,
+          "table7": "1.41 (8.12)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.7950429218167159,
+          "failure_only": 0.7180067544187124,
+          "overall_pct": 79.5,
+          "failure_only_pct": 71.8,
+          "table7": "79.50 (71.80)"
+        },
+        "nl": {
+          "overall": 0.051432291666666664,
+          "failure_only": 0.146773582682467,
+          "overall_pct": 5.14,
+          "failure_only_pct": 14.68,
+          "table7": "5.14 (14.68)"
+        },
+        "defcls": {
+          "overall": 0.18619791666666666,
+          "failure_only": 0.21423040667923512,
+          "overall_pct": 18.62,
+          "failure_only_pct": 21.42,
+          "table7": "18.62 (21.42)"
+        }
+      }
+    },
+    {
+      "family_key": "dscoder",
+      "family": "DeepSeek-Coder",
+      "model": "6.7B",
+      "size_key": "6.7b",
+      "variant": "base",
+      "sources": {
+        "hefim": "fidelity/HEFIM/dscoder/HEFIM-dsc-6.7b-base-trimmed-before-hash-from.jsonl",
+        "safim_block": "fidelity/safim-block/dscoder/deepseek-coder-6.7b-base-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/dscoder/deepseek-coder-6.7b-base-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/dscoder/SAFIM-api-dsc-6.7b-base.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/dscoder/deepseek-coder-6.7b-base_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/dscoder-0.1/deepseek-coder-6.7b-base-ClassEval-Completion-changedpromptv4.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/dscoder/deepseek-ai--deepseek-coder-6.7b-base--main--bigcodebench-complete--hf-0-1-sanitized_calibrated.jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.9371582740311878,
+          "failure_only": 0.04112647934376515,
+          "overall_pct": 93.72,
+          "failure_only_pct": 4.11,
+          "table7": "93.72 (4.11)"
+        },
+        "nl": {
+          "overall": 0.0014546948135642846,
+          "failure_only": 0.026783092322447802,
+          "overall_pct": 0.15,
+          "failure_only_pct": 2.68,
+          "table7": "0.15 (2.68)"
+        },
+        "defcls": {
+          "overall": 0.007930543693934972,
+          "failure_only": 0.06477628851988398,
+          "overall_pct": 0.79,
+          "failure_only_pct": 6.48,
+          "table7": "0.79 (6.48)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.8205781053998903,
+          "failure_only": 0.8034729990637802,
+          "overall_pct": 82.06,
+          "failure_only_pct": 80.35,
+          "table7": "82.06 (80.35)"
+        },
+        "nl": {
+          "overall": 0.056640625,
+          "failure_only": 0.0861235119047619,
+          "overall_pct": 5.66,
+          "failure_only_pct": 8.61,
+          "table7": "5.66 (8.61)"
+        },
+        "defcls": {
+          "overall": 0.150390625,
+          "failure_only": 0.18880208333333334,
+          "overall_pct": 15.04,
+          "failure_only_pct": 18.88,
+          "table7": "15.04 (18.88)"
+        }
+      }
+    },
+    {
+      "family_key": "dscoder",
+      "family": "DeepSeek-Coder",
+      "model": "33B",
+      "size_key": "33b",
+      "variant": "base",
+      "sources": {
+        "hefim": "fidelity/HEFIM/dscoder/HEFIM-dsc-33b-base-first-nonempty-line.jsonl",
+        "safim_block": "fidelity/safim-block/dscoder/deepseek-coder-33b-base-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/dscoder/deepseek-coder-33b-base-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/dscoder/SAFIM-api-dsc-33b-base.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/dscoder/deepseek-coder-33b-base_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/dscoder-0.1/deepseek-coder-33b-base-ClassEval-Completion-changedpromptv4-pass1.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/dscoder/deepseek-ai--deepseek-coder-33b-base--main--bigcodebench-complete--hf-0-1-sanitized_calibrated.jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.949165486363376,
+          "failure_only": 0.06766193006693645,
+          "overall_pct": 94.92,
+          "failure_only_pct": 6.77,
+          "table7": "94.92 (6.77)"
+        },
+        "nl": {
+          "overall": 0.0015485529031130268,
+          "failure_only": 0.05136395484262528,
+          "overall_pct": 0.15,
+          "failure_only_pct": 5.14,
+          "table7": "0.15 (5.14)"
+        },
+        "defcls": {
+          "overall": 0.007226648808904469,
+          "failure_only": 0.06364708604428934,
+          "overall_pct": 0.72,
+          "failure_only_pct": 6.36,
+          "table7": "0.72 (6.36)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.8016302321205325,
+          "failure_only": 0.77522054960634,
+          "overall_pct": 80.16,
+          "failure_only_pct": 77.52,
+          "table7": "80.16 (77.52)"
+        },
+        "nl": {
+          "overall": 0.033203125,
+          "failure_only": 0.11858223482819315,
+          "overall_pct": 3.32,
+          "failure_only_pct": 11.86,
+          "table7": "3.32 (11.86)"
+        },
+        "defcls": {
+          "overall": 0.173828125,
+          "failure_only": 0.25395091164766204,
+          "overall_pct": 17.38,
+          "failure_only_pct": 25.4,
+          "table7": "17.38 (25.40)"
+        }
+      }
+    },
+    {
+      "family_key": "dscoder",
+      "family": "DeepSeek-Coder",
+      "model": "1.3B-Instruct",
+      "size_key": "1.3b",
+      "variant": "instruct",
+      "sources": {
+        "hefim": "fidelity/HEFIM/dscoder/HEI-dsc-1.3b-instruct-trimmed-before-hash-from.jsonl",
+        "safim_block": "fidelity/safim-block/dscoder/deepseek-coder-1.3b-instruct-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/dscoder/deepseek-coder-1.3b-instruct-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/dscoder/SAFIM-api-1.3b-instruct.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/dscoder/dscoder1.3binstruct_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/dscoder-0.1/deepseek-coder-1.3b-instruct-ClassEval-Completion-changedpromptv4.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/dscoder/deepseek-ai--deepseek-coder-1.3b-instruct--main--bigcodebench-complete--hf-0-1-sanitized_calibrated.jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.6259780651528717,
+          "failure_only": 0.14387907093368377,
+          "overall_pct": 62.6,
+          "failure_only_pct": 14.39,
+          "table7": "62.60 (14.39)"
+        },
+        "nl": {
+          "overall": 0.06236973351540019,
+          "failure_only": 0.17600670518051847,
+          "overall_pct": 6.24,
+          "failure_only_pct": 17.6,
+          "table7": "6.24 (17.60)"
+        },
+        "defcls": {
+          "overall": 0.12214982504850595,
+          "failure_only": 0.16027518561500742,
+          "overall_pct": 12.21,
+          "failure_only_pct": 16.03,
+          "table7": "12.21 (16.03)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.8579531856003776,
+          "failure_only": 0.8548987104345173,
+          "overall_pct": 85.8,
+          "failure_only_pct": 85.49,
+          "table7": "85.80 (85.49)"
+        },
+        "nl": {
+          "overall": 0.115234375,
+          "failure_only": 0.1411392456117708,
+          "overall_pct": 11.52,
+          "failure_only_pct": 14.11,
+          "table7": "11.52 (14.11)"
+        },
+        "defcls": {
+          "overall": 0.091796875,
+          "failure_only": 0.09991247741352606,
+          "overall_pct": 9.18,
+          "failure_only_pct": 9.99,
+          "table7": "9.18 (9.99)"
+        }
+      }
+    },
+    {
+      "family_key": "dscoder",
+      "family": "DeepSeek-Coder",
+      "model": "6.7B-Instruct",
+      "size_key": "6.7b",
+      "variant": "instruct",
+      "sources": {
+        "hefim": "fidelity/HEFIM/dscoder/HEI-dsc-6.7b-instruct-trimmed-before-hash-from.jsonl",
+        "safim_block": "fidelity/safim-block/dscoder/deepseek-coder-6.7b-instruct-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/dscoder/deepseek-coder-6.7b-instruct-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/dscoder/SAFIM-api-6.7b-instruct.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/dscoder/deepseek-coder-6.7b-instruct_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/dscoder-0.1/deepseek-coder-6.7b-instruct-ClassEval-Completion-changedpromptv4.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/dscoder/deepseek-ai--deepseek-coder-6.7b-instruct--main--bigcodebench-complete--hf-0-1-sanitized_calibrated.jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.5837561007898324,
+          "failure_only": 0.09092071061953247,
+          "overall_pct": 58.38,
+          "failure_only_pct": 9.09,
+          "table7": "58.38 (9.09)"
+        },
+        "nl": {
+          "overall": 0.023885817839109952,
+          "failure_only": 0.04512325375132508,
+          "overall_pct": 2.39,
+          "failure_only_pct": 4.51,
+          "table7": "2.39 (4.51)"
+        },
+        "defcls": {
+          "overall": 0.11553274572545179,
+          "failure_only": 0.14067624447102506,
+          "overall_pct": 11.55,
+          "failure_only_pct": 14.07,
+          "table7": "11.55 (14.07)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.7967725811901949,
+          "failure_only": 0.7842955141009714,
+          "overall_pct": 79.68,
+          "failure_only_pct": 78.43,
+          "table7": "79.68 (78.43)"
+        },
+        "nl": {
+          "overall": 0.043619791666666664,
+          "failure_only": 0.07492073016906022,
+          "overall_pct": 4.36,
+          "failure_only_pct": 7.49,
+          "table7": "4.36 (7.49)"
+        },
+        "defcls": {
+          "overall": 0.240234375,
+          "failure_only": 0.26530432546530563,
+          "overall_pct": 24.02,
+          "failure_only_pct": 26.53,
+          "table7": "24.02 (26.53)"
+        }
+      }
+    },
+    {
+      "family_key": "dscoder",
+      "family": "DeepSeek-Coder",
+      "model": "33B-Instruct",
+      "size_key": "33b",
+      "variant": "instruct",
+      "sources": {
+        "hefim": "fidelity/HEFIM/dscoder/HEI-dsc-33b-instruct-trimmed-before-hash-from.jsonl",
+        "safim_block": "fidelity/safim-block/dscoder/deepseek-coder-33b-instruct-fim-tb.jsonl",
+        "safim_control": "fidelity/safim-control/dscoder/deepseek-coder-33b-instruct-fim-tc.jsonl",
+        "safim_api": "fidelity/safim-api/dscoder/SAFIM-api-33b-instruct.jsonl",
+        "classeval_infilling": "fidelity/classevalinfilling/dscoder/deepseek-coder-33b-instruct_ClassEval-LineInfilling.jsonl",
+        "classeval_completion": "fidelity/classevalcompletion/dscoder-0.1/deepseek-coder-33b-instruct-ClassEval-Completion-changedpromptv4-maxcorrect.jsonl",
+        "bigcodebench_raw": "fidelity/bigcodebench/raw/dscoder/deepseek-ai--deepseek-coder-33b-instruct--main--bigcodebench-complete--hf-0-1-sanitized_calibrated (1).jsonl"
+      },
+      "infilling": {
+        "ctr": {
+          "overall": 0.5463672840467008,
+          "failure_only": 0.10373245420442108,
+          "overall_pct": 54.64,
+          "failure_only_pct": 10.37,
+          "table7": "54.64 (10.37)"
+        },
+        "nl": {
+          "overall": 0.039232038353748125,
+          "failure_only": 0.06405592567483856,
+          "overall_pct": 3.92,
+          "failure_only_pct": 6.41,
+          "table7": "3.92 (6.41)"
+        },
+        "defcls": {
+          "overall": 0.13097338342991102,
+          "failure_only": 0.15309800623967978,
+          "overall_pct": 13.1,
+          "failure_only_pct": 15.31,
+          "table7": "13.10 (15.31)"
+        }
+      },
+      "completion": {
+        "ctr": {
+          "overall": 0.792041709998994,
+          "failure_only": 0.7883922453756324,
+          "overall_pct": 79.2,
+          "failure_only_pct": 78.84,
+          "table7": "79.20 (78.84)"
+        },
+        "nl": {
+          "overall": 0.036458333333333336,
+          "failure_only": 0.05555098422138657,
+          "overall_pct": 3.65,
+          "failure_only_pct": 5.56,
+          "table7": "3.65 (5.56)"
+        },
+        "defcls": {
+          "overall": 0.23177083333333334,
+          "failure_only": 0.24620273586258545,
+          "overall_pct": 23.18,
+          "failure_only_pct": 24.62,
+          "table7": "23.18 (24.62)"
+        }
+      }
+    }
+  ]
+}
