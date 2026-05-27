@@ -99,80 +99,47 @@ const behaviorRows = [
   },
 ];
 
-const stageAverages = [
-  {
-    stage: "Base",
-    infilling: 66.1,
-    infillingDelta: "0.00%",
-    completion: 42.98,
-    completionDelta: "0.00%",
-    instruction: null,
-    instructionDelta: "NA",
-  },
-  {
-    stage: "75k",
-    infilling: 64.8,
-    infillingDelta: "-1.97%",
-    completion: 45.93,
-    completionDelta: "+6.86%",
-    instruction: 51.19,
-    instructionDelta: "0.00%",
-  },
-  {
-    stage: "110k",
-    infilling: 64.61,
-    infillingDelta: "-2.25%",
-    completion: 44.11,
-    completionDelta: "+2.65%",
-    instruction: 57.17,
-    instructionDelta: "+11.68%",
-  },
-];
-
-function pairRowsByFamily() {
-  const families = new Map();
-
-  for (const row of behaviorRows) {
-    if (!families.has(row.family)) {
-      families.set(row.family, new Map());
-    }
-
-    const modelRows = families.get(row.family);
-    if (!modelRows.has(row.model)) {
-      modelRows.set(row.model, {});
-    }
-
-    modelRows.get(row.model)[row.variant] = row;
-  }
-
-  return families;
-}
-
 function average(values) {
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
-function summarizeFamily(pairMap, family) {
-  const deltas = {
-    infilling: { ctr: [], nl: [], defcls: [] },
-    completion: { ctr: [], nl: [], defcls: [] },
-  };
+function summarizeByFamily() {
+  const grouped = new Map();
 
-  for (const pair of pairMap.values()) {
-    if (!pair.base || !pair.instruct) {
-      continue;
+  for (const row of behaviorRows) {
+    if (!grouped.has(row.family)) {
+      grouped.set(row.family, new Map());
     }
-
-    for (const task of ["infilling", "completion"]) {
-      for (const metric of ["ctr", "nl", "defcls"]) {
-        deltas[task][metric].push(pair.instruct[task][metric] - pair.base[task][metric]);
-      }
+    const familyMap = grouped.get(row.family);
+    if (!familyMap.has(row.model)) {
+      familyMap.set(row.model, {});
     }
+    familyMap.get(row.model)[row.variant] = row;
   }
 
-  return {
-    family,
-    summary: {
+  const summaries = [];
+  for (const [family, models] of grouped.entries()) {
+    const deltas = {
+      infilling: { ctr: [], nl: [], defcls: [] },
+      completion: { ctr: [], nl: [], defcls: [] },
+    };
+
+    for (const pair of models.values()) {
+      if (!pair.base || !pair.instruct) {
+        continue;
+      }
+
+      for (const task of ["infilling", "completion"]) {
+        for (const metric of ["ctr", "nl", "defcls"]) {
+          deltas[task][metric].push(
+            pair.instruct[task][metric] - pair.base[task][metric]
+          );
+        }
+      }
+    }
+
+    summaries.push({
+      family,
       infilling: {
         ctr: average(deltas.infilling.ctr),
         nl: average(deltas.infilling.nl),
@@ -183,28 +150,21 @@ function summarizeFamily(pairMap, family) {
         nl: average(deltas.completion.nl),
         defcls: average(deltas.completion.defcls),
       },
-    },
-  };
+    });
+  }
+
+  return summaries;
 }
 
 function formatDelta(value) {
   return `${value >= 0 ? "+" : ""}${value.toFixed(2)} pts`;
 }
 
-function createDeltaRow(label, delta, betterWhenLower, maxDelta) {
-  const isGood = betterWhenLower ? delta <= 0 : delta >= 0;
-  const width = `${Math.max(8, (Math.abs(delta) / maxDelta) * 100)}%`;
-  return `
-    <div class="delta-row">
-      <div class="delta-head">
-        <span>${label}</span>
-        <span class="delta-value ${isGood ? "good" : "bad"}">${formatDelta(delta)}</span>
-      </div>
-      <div class="delta-bar">
-        <span class="delta-fill ${isGood ? "good" : "bad"}" style="width:${width};"></span>
-      </div>
-    </div>
-  `;
+function metricClass(metric, value) {
+  if (metric === "ctr") {
+    return value >= 0 ? "metric-good" : "metric-bad";
+  }
+  return value <= 0 ? "metric-good" : "metric-bad";
 }
 
 function renderBehaviorGrid() {
@@ -213,107 +173,34 @@ function renderBehaviorGrid() {
     return;
   }
 
-  const familySummaries = [];
-  for (const [family, pairMap] of pairRowsByFamily()) {
-    familySummaries.push(summarizeFamily(pairMap, family));
-  }
-
-  const allDeltaMagnitudes = familySummaries.flatMap(({ summary }) => [
-    Math.abs(summary.infilling.ctr),
-    Math.abs(summary.infilling.nl),
-    Math.abs(summary.infilling.defcls),
-    Math.abs(summary.completion.ctr),
-    Math.abs(summary.completion.nl),
-    Math.abs(summary.completion.defcls),
-  ]);
-  const maxDelta = Math.max(...allDeltaMagnitudes);
-
-  container.innerHTML = familySummaries
+  const summaries = summarizeByFamily();
+  container.innerHTML = summaries
     .map(
-      ({ family, summary }) => `
-        <article class="family-panel">
-          <div class="family-panel-header">
-            <h3>${family}</h3>
-            <p>Average instruct minus base shift</p>
+      (summary) => `
+        <section class="behavior-panel">
+          <h4>${summary.family}</h4>
+          <div class="table-wrap">
+            <table class="metric-table">
+              <thead>
+                <tr>
+                  <th>Task / Metric</th>
+                  <th>Average delta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Infilling CTR</strong></td><td class="${metricClass("ctr", summary.infilling.ctr)}">${formatDelta(summary.infilling.ctr)}</td></tr>
+                <tr><td>Infilling NL</td><td class="${metricClass("nl", summary.infilling.nl)}">${formatDelta(summary.infilling.nl)}</td></tr>
+                <tr><td>Infilling Def/Cls</td><td class="${metricClass("defcls", summary.infilling.defcls)}">${formatDelta(summary.infilling.defcls)}</td></tr>
+                <tr><td><strong>Completion CTR</strong></td><td class="${metricClass("ctr", summary.completion.ctr)}">${formatDelta(summary.completion.ctr)}</td></tr>
+                <tr><td>Completion NL</td><td class="${metricClass("nl", summary.completion.nl)}">${formatDelta(summary.completion.nl)}</td></tr>
+                <tr><td>Completion Def/Cls</td><td class="${metricClass("defcls", summary.completion.defcls)}">${formatDelta(summary.completion.defcls)}</td></tr>
+              </tbody>
+            </table>
           </div>
-          <div class="task-block">
-            <h4>Infilling</h4>
-            ${createDeltaRow("CTR", summary.infilling.ctr, false, maxDelta)}
-            ${createDeltaRow("NL", summary.infilling.nl, true, maxDelta)}
-            ${createDeltaRow("Def/Cls", summary.infilling.defcls, true, maxDelta)}
-          </div>
-          <div class="task-block">
-            <h4>Completion</h4>
-            ${createDeltaRow("CTR", summary.completion.ctr, false, maxDelta)}
-            ${createDeltaRow("NL", summary.completion.nl, true, maxDelta)}
-            ${createDeltaRow("Def/Cls", summary.completion.defcls, true, maxDelta)}
-          </div>
-        </article>
+        </section>
       `
     )
     .join("");
-}
-
-function renderStageGrid() {
-  const container = document.getElementById("stage-grid");
-  if (!container) {
-    return;
-  }
-
-  container.innerHTML = stageAverages
-    .map(
-      (stage) => `
-        <article class="stage-card">
-          <span class="stage-name">${stage.stage}</span>
-          <h3>${stage.stage} stage</h3>
-          <p>
-            ${
-              stage.stage === "Base"
-                ? "Reference model before public instruction tuning."
-                : "Grouped averages across checkpoints in the replicated Magicoder pipeline."
-            }
-          </p>
-          <div class="stage-metrics">
-            <div class="stage-metric">
-              <small>Infilling average</small>
-              <strong>${stage.infilling.toFixed(2)}</strong>
-              <small>Delta: ${stage.infillingDelta}</small>
-            </div>
-            <div class="stage-metric">
-              <small>Completion average</small>
-              <strong>${stage.completion.toFixed(2)}</strong>
-              <small>Delta: ${stage.completionDelta}</small>
-            </div>
-            <div class="stage-metric">
-              <small>Instruction average</small>
-              <strong>${stage.instruction === null ? "NA" : stage.instruction.toFixed(2)}</strong>
-              <small>Delta: ${stage.instructionDelta}</small>
-            </div>
-          </div>
-        </article>
-      `
-    )
-    .join("");
-}
-
-function enableReveal() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      }
-    },
-    { threshold: 0.12 }
-  );
-
-  for (const node of document.querySelectorAll(".reveal")) {
-    observer.observe(node);
-  }
 }
 
 renderBehaviorGrid();
-renderStageGrid();
-enableReveal();

@@ -3,383 +3,689 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CodeTalkers | Project Page</title>
+    <title>CodeTalkers | Academic Project Page</title>
     <meta
       name="description"
-      content="Project page for Lost in the Flow with Code Talkers: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks."
+      content="Academic project page for Lost in the Flow with Code Talkers: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks."
+    />
+    <meta
+      name="keywords"
+      content="CodeTalkers, code LLMs, instruction tuning, code infilling, code completion, empirical software engineering"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#top">CodeTalkers</a>
-      <nav class="topnav" aria-label="Primary">
-        <a href="#modes">Motivation</a>
-        <a href="#design">Design</a>
-        <a href="#results">Findings</a>
-        <a href="#behavior">Behavior</a>
-        <a href="#resources">Resources</a>
-      </nav>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="site-mark" href="#top">CodeTalkers</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#abstract">Abstract</a>
+          <a href="#overview">Overview</a>
+          <a href="#findings">Findings</a>
+          <a href="#discussion">Discussion</a>
+          <a href="#citation">Citation</a>
+        </nav>
+      </div>
     </header>
 
     <main id="top">
-      <section class="hero reveal">
-        <div class="hero-copy">
-          <p class="eyebrow">Paper companion page</p>
-          <h1>Lost in the Flow with Code Talkers</h1>
-          <p class="authors">
-            Chang Shi Ying, Chiok Yew Ho, Yichen Li, and Yintong Huo
+      <section class="hero">
+        <div class="container hero-inner">
+          <p class="publication-note">Project Page</p>
+          <h1 class="publication-title">
+            Lost in the Flow with Code Talkers: Unveiling the
+            Instruction-Tuning Tax of Large Language Models in Code Tasks
+          </h1>
+          <p class="publication-authors">
+            Chang Shi Ying<sup>*</sup>,
+            Chiok Yew Ho<sup>*</sup>,
+            Yichen Li,
+            Yintong Huo
           </p>
-          <p class="lede">
-            Instruction tuning makes code models better at command-style interaction,
-            but the paper shows that the gain is not free: infilling degrades,
-            completion changes benchmark by benchmark, and generation behavior becomes
-            more verbose and less tightly bounded.
+          <p class="publication-affiliations">
+            Singapore Management University and The Chinese University of Hong Kong
           </p>
-          <div class="cta-row">
+          <p class="publication-meta"><sup>*</sup>Equal contribution</p>
+          <div class="publication-links">
+            <a class="publication-link" href="#" aria-label="paper link placeholder">
+              Paper
+            </a>
             <a
-              class="button button-primary"
-              href="https://raw.githubusercontent.com/arkosioscambions/CodeTalkers/main/CodeTalker_TOSEM2026.pdf"
-              target="_blank"
-              rel="noreferrer"
-              >Paper PDF</a
-            >
-            <a
-              class="button button-secondary"
+              class="publication-link"
               href="https://github.com/arkosioscambions/CodeTalkers"
               target="_blank"
               rel="noreferrer"
-              >Code</a
             >
-            <a class="button button-ghost" href="#results">Results</a>
-            <a class="button button-ghost" href="#citation">Citation</a>
+              Code
+            </a>
+            <a
+              class="publication-link"
+              href="https://huggingface.co/collections/annachaaang/qwen25-coder-7b-magicoder-scaling"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Models
+            </a>
           </div>
-          <ul class="stat-strip" aria-label="Project at a glance">
-            <li>2 model families</li>
-            <li>3 task categories</li>
-            <li>7 findings</li>
-            <li>25-page manuscript</li>
-          </ul>
-        </div>
-
-        <aside class="hero-panel">
-          <article class="signal-card">
-            <span class="signal-tag">Flow mode</span>
-            <h2>Completion and infilling inside unfinished code</h2>
-            <p>
-              The paper treats localized continuation as a distinct cognitive mode
-              where developers expect short, bounded, structure-aware suggestions.
-            </p>
-          </article>
-          <article class="signal-card">
-            <span class="signal-tag">Command mode</span>
-            <h2>Natural-language intent to executable code</h2>
-            <p>
-              Instruction tuning is designed for this setting, where the model must
-              infer and follow developer intent expressed in natural language.
-            </p>
-          </article>
-          <article class="signal-card accent-card">
-            <span class="signal-tag">Main claim</span>
-            <h2>The Instruction-Tuning Tax</h2>
-            <p>
-              Instruction tuning reallocates capability. It helps some task modes,
-              but it can weaken infilling and alter generation behavior in ways that
-              matter for real coding assistants.
-            </p>
-          </article>
-        </aside>
-      </section>
-
-      <section id="modes" class="section reveal">
-        <div class="section-head">
-          <p class="eyebrow">Motivation</p>
-          <h2>Programming has two cognitive modes</h2>
-          <p>
-            The paper argues that code assistants serve developers in two different
-            ways, and those modes demand different model behavior.
-          </p>
-        </div>
-        <div class="mode-grid">
-          <article class="mode-card">
-            <div class="mode-label">Flow</div>
-            <h3>Stay inside the code and keep momentum</h3>
-            <p>
-              Developers are extending an existing thought process. They need code
-              completion or fill-in-the-middle suggestions that respect the local
-              prefix, suffix, and surrounding structure.
-            </p>
-            <ul>
-              <li>Code completion</li>
-              <li>Fill-in-the-middle infilling</li>
-              <li>Short, bounded, syntax-aware continuations</li>
-            </ul>
-          </article>
-          <article class="mode-card">
-            <div class="mode-label">Command</div>
-            <h3>Step back and describe intent in natural language</h3>
-            <p>
-              Developers articulate what they want. The model should understand the
-              instruction and synthesize code that follows the described goal or
-              specification.
-            </p>
-            <ul>
-              <li>Instruction following</li>
-              <li>Natural-language to code generation</li>
-              <li>Preference alignment and assistant-like behavior</li>
-            </ul>
-          </article>
         </div>
       </section>
 
-      <section id="design" class="section reveal">
-        <div class="section-head">
-          <p class="eyebrow">Study design</p>
-          <h2>What the paper evaluates</h2>
-          <p>
-            The study compares matched base and instruct models, then combines
-            benchmark performance, failure analysis, and checkpoint evolution to
-            understand what instruction tuning changes.
-          </p>
-        </div>
-        <div class="design-grid">
-          <article class="design-card">
-            <h3>Model families</h3>
-            <p>Two open-source CodeLLM families with matched base and instruct variants.</p>
-            <ul class="chip-list">
-              <li>Qwen2.5-Coder: 1.5B, 7B, 14B, 32B</li>
-              <li>DeepSeek-Coder: 1.3B, 6.7B, 33B</li>
-            </ul>
-          </article>
-          <article class="design-card">
-            <h3>Task categories</h3>
-            <p>
-              Flow-mode tasks emphasize local structure, while command-mode tasks
-              emphasize instruction understanding.
-            </p>
-            <ul class="chip-list">
-              <li>Infilling: HEFIM, SAFIM, ClassEval-LineInfilling</li>
-              <li>Completion: ClassEval-Completion, BigCodeBench-Complete</li>
-              <li>Instruction following: DS-1000, HumanEval, MBPP, BigCodeBench-Instruct</li>
-            </ul>
-          </article>
-          <article class="design-card">
-            <h3>Research questions</h3>
-            <p>The paper moves from headline performance into causes and evolution.</p>
-            <ol>
-              <li>RQ1: How do base and instruct models differ on representative tasks?</li>
-              <li>RQ2: What behavioral shifts explain those differences?</li>
-              <li>RQ3: How do capabilities change over the tuning trajectory?</li>
-            </ol>
-          </article>
+      <section class="section section-tight">
+        <div class="container">
+          <figure class="paper-figure teaser-figure">
+            <div class="pdf-frame pdf-frame-teaser">
+              <a
+                class="figure-link"
+                href="./assets/figures/intro.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src="./assets/figures/png/intro.png"
+                  alt="Figure 1 showing Flow mode and Command mode."
+                  class="figure-image"
+                />
+              </a>
+            </div>
+            <figcaption>
+              Figure 1 from the paper. AI-assisted programming is framed through two
+              cognitive modes: Flow mode and Command mode.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
-      <section id="results" class="section reveal">
-        <div class="section-head">
-          <p class="eyebrow">Findings</p>
-          <h2>What the paper argues</h2>
-          <p>
-            The results are not simply "base bad, instruct good" or the reverse.
-            The paper shows a task-dependent capability trade-off and treats it as a
-            deployment problem, not just a leaderboard result.
-          </p>
-        </div>
-        <div class="findings-grid">
-          <article class="finding-card">
-            <span class="finding-index">01</span>
-            <h3>Infilling shows the tax most clearly</h3>
+      <section id="abstract" class="section">
+        <div class="container narrow">
+          <h2 class="section-title">Abstract</h2>
+          <div class="abstract-card">
             <p>
-              Base models retain stronger fill-in-the-middle behavior, and the loss
-              after instruction tuning appears consistently across representative
-              infilling settings.
+              Modern coding assistants must operate in two different settings. In
+              Flow mode, developers expect localized completion or infilling inside an
+              unfinished program. In Command mode, they express intent in natural
+              language and expect executable code in return. This paper studies
+              whether instruction tuning is equally beneficial for both modes.
             </p>
-          </article>
-          <article class="finding-card">
-            <span class="finding-index">02</span>
-            <h3>Completion often rises, but not uniformly</h3>
             <p>
-              Instruct models often benefit from guidance-heavy or docstring-shaped
-              completion tasks, but the gain depends on the benchmark and weakens in
-              later tuning stages.
+              Across matched Base and Instruct variants of Qwen2.5-Coder and
+              DeepSeek-Coder, the paper shows that instruction tuning is not a free
+              lunch. It often improves instruction-oriented tasks and guidance-heavy
+              completion, but can weaken infilling and change generation behavior in
+              ways that matter for real-world coding assistants. The study combines
+              benchmark comparisons, failure analysis, behavior-oriented metrics, and
+              intermediate-checkpoint evaluation to characterize this trade-off as the
+              Instruction-Tuning Tax.
             </p>
-          </article>
-          <article class="finding-card">
-            <span class="finding-index">03</span>
-            <h3>Instruction following improves most clearly</h3>
-            <p>
-              The command-mode upside is real. Later tuning stages strengthen
-              instruction-oriented behavior even when they do not uniformly improve
-              other forms of code generation.
-            </p>
-          </article>
-          <article class="finding-card">
-            <span class="finding-index">04</span>
-            <h3>Capability is reallocated, not uniformly improved</h3>
-            <p>
-              The paper's conclusion is that instruction tuning is not a free lunch.
-              It shifts model strengths across task types rather than simply making
-              code models better at everything.
-            </p>
-          </article>
+          </div>
         </div>
       </section>
 
-      <section id="behavior" class="section reveal">
-        <div class="section-head">
-          <p class="eyebrow">RQ2</p>
-          <h2>Behavior shifts, not just benchmark scores</h2>
-          <p>
-            The manuscript's second contribution is a fidelity-oriented view of
-            generated code. The page below summarizes the weighted RQ2 metrics
-            generated from the repository artifacts.
-          </p>
-        </div>
-        <div class="metric-key">
-          <div><strong>CTR</strong> Higher is better. More tokens look like code.</div>
-          <div><strong>NL</strong> Lower is better. Less natural-language leakage.</div>
-          <div><strong>Def/Cls</strong> Lower is better. Fewer unnecessary extra declarations.</div>
-        </div>
-        <div id="behavior-grid" class="metric-grid" aria-live="polite"></div>
-        <p class="note">
-          These deltas are computed from the RQ2 weighted metrics produced by
-          <code>generate_rq2_table7.py</code>. They compare the average shift from
-          base to instruct models within each family.
-        </p>
-      </section>
-
-      <section id="trajectory" class="section reveal">
-        <div class="section-head">
-          <p class="eyebrow">RQ3</p>
-          <h2>Tuning reallocates capability over time</h2>
-          <p>
-            The checkpoint analysis in the manuscript shows that capability changes
-            are non-monotonic. Instruction following rises, infilling slips, and
-            completion stays positive on average but loses momentum in later stages.
-          </p>
-        </div>
-        <div id="stage-grid" class="stage-grid" aria-live="polite"></div>
-        <p class="note">
-          Stage-level grouped averages are taken from Table 9 of the manuscript:
-          Base, 75k, and 110k stages of the replicated Magicoder tuning process.
-        </p>
-      </section>
-
-      <section id="implications" class="section reveal">
-        <div class="section-head">
-          <p class="eyebrow">Discussion</p>
-          <h2>Why the paper matters</h2>
-          <p>
-            The takeaway is not only about accuracy. It is about how coding
-            assistants should be trained, selected, and safeguarded for different
-            developer workflows.
-          </p>
-        </div>
-        <div class="implication-grid">
-          <article class="implication-card">
-            <h3>For researchers</h3>
-            <ul>
-              <li>Instruction-tuning tax appears model-specific, not universal.</li>
-              <li>
-                Future post-training should preserve concise, boundary-aware
-                continuation for flow-mode tasks.
-              </li>
-              <li>
-                Behavior metrics matter because the trade-off is visible in how
-                models fail, not only in whether they pass.
-              </li>
-            </ul>
-          </article>
-          <article class="implication-card">
-            <h3>For practitioners</h3>
-            <ul>
-              <li>Do not choose models only from aggregate benchmark scores.</li>
-              <li>
-                Deployment safeguards should target dominant failure modes such as
-                verbosity, NL leakage, or extra code.
-              </li>
-              <li>
-                Routing flow-mode and command-mode tasks may be better than treating
-                "instruct" as a universal upgrade.
-              </li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="resources" class="section reveal">
-        <div class="section-head">
-          <p class="eyebrow">Resources</p>
-          <h2>Paper, code, and deployment</h2>
-          <p>
-            This page is structured for GitHub Pages. The simplest deployment path is
-            to publish the repository's <code>docs/</code> folder from the
-            <code>main</code> branch.
-          </p>
-        </div>
-        <div class="resource-grid">
-          <article class="resource-card">
-            <h3>Links</h3>
-            <ul>
-              <li>
+      <section class="section section-subtle">
+        <div class="container">
+          <h2 class="section-title">Why This Matters</h2>
+          <div class="two-column">
+            <div class="text-panel">
+              <p>
+                The motivating example in the paper shows the core concern:
+                instruction-tuned models may generate extra code around the target
+                span, even when the desired answer is a concise local insertion.
+              </p>
+              <p>
+                That matters because the assistant behavior needed for a chat-style
+                instruction is not the same as the assistant behavior needed for a
+                precise fill-in-the-middle suggestion inside a live codebase.
+              </p>
+            </div>
+            <figure class="paper-figure compact-figure">
+              <div class="pdf-frame pdf-frame-medium">
                 <a
-                  href="https://raw.githubusercontent.com/arkosioscambions/CodeTalkers/main/CodeTalker_TOSEM2026.pdf"
+                  class="figure-link"
+                  href="./assets/figures/motivating_case.pdf"
                   target="_blank"
                   rel="noreferrer"
-                  >Open the manuscript PDF</a
                 >
-              </li>
-              <li>
+                  <img
+                    src="./assets/figures/png/motivating_case.png"
+                    alt="Motivating example contrasting Base and Instruct behavior."
+                    class="figure-image"
+                  />
+                </a>
+              </div>
+              <figcaption>
+                A motivating example contrasting Base and Instruct behavior on
+                fill-in-the-middle generation.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="overview" class="section">
+        <div class="container">
+          <h2 class="section-title">Study Overview</h2>
+          <p class="section-intro">
+            The page follows the structure of the paper: a conceptual framing around
+            Flow and Command modes, a benchmark-based endpoint comparison, a failure
+            analysis, behavior-level metrics, and a controlled replication of the
+            instruction-tuning trajectory.
+          </p>
+          <div class="figure-grid">
+            <figure class="paper-figure">
+              <div class="pdf-frame pdf-frame-large">
                 <a
-                  href="https://github.com/arkosioscambions/CodeTalkers"
+                  class="figure-link"
+                  href="./assets/figures/ExperimentalSettings-cropped.pdf"
                   target="_blank"
                   rel="noreferrer"
-                  >Browse the repository</a
                 >
-              </li>
-              <li>
+                  <img
+                    src="./assets/figures/png/ExperimentalSettings-cropped.png"
+                    alt="Experimental settings corresponding to the three research questions."
+                    class="figure-image"
+                  />
+                </a>
+              </div>
+              <figcaption>
+                Experimental settings corresponding to the three research questions.
+              </figcaption>
+            </figure>
+            <figure class="paper-figure">
+              <div class="pdf-frame pdf-frame-large">
                 <a
-                  href="https://github.com/arkosioscambions/CodeTalkers/blob/main/results/rq2_table7.json"
+                  class="figure-link"
+                  href="./assets/figures/task-formulation.pdf"
                   target="_blank"
                   rel="noreferrer"
-                  >RQ2 behavioral metrics</a
                 >
-              </li>
-            </ul>
-          </article>
-          <article class="resource-card" id="citation">
-            <h3>Citation</h3>
+                  <img
+                    src="./assets/figures/png/task-formulation.png"
+                    alt="Task formulation with infilling, completion, and instruction-following examples."
+                    class="figure-image"
+                  />
+                </a>
+              </div>
+              <figcaption>
+                Task formulation with examples for infilling, completion, and
+                instruction following.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="findings" class="section section-subtle">
+        <div class="container">
+          <h2 class="section-title">Findings</h2>
+          <p class="section-intro">
+            Each finding below states the paper's claim first. Expand a card to see
+            the supporting explanation and the original evidence.
+          </p>
+
+          <div class="findings-accordion">
+            <details class="finding-card" open>
+              <summary>
+                <div class="finding-summary-main">
+                  <p class="finding-label">Finding 1</p>
+                  <h3>
+                    The instruction-tuning tax exists in most cases, but its magnitude
+                    varies a lot across different model families.
+                  </h3>
+                  <p>
+                    Across representative infilling and completion benchmarks, both
+                    families show trade-offs after instruction tuning, but DeepSeek is
+                    much more brittle than Qwen on infilling.
+                  </p>
+                </div>
+                <span class="toggle-chip"></span>
+              </summary>
+              <div class="finding-body">
+                <div class="table-grid">
+                  <div class="table-card">
+                    <h4>Qwen2.5-Coder (RQ1)</h4>
+                    <div class="table-wrap">
+                      <table class="results-table">
+                        <thead>
+                          <tr>
+                            <th>Model</th>
+                            <th>HEFIM</th>
+                            <th>SAFIM</th>
+                            <th>CE-Inf</th>
+                            <th>BCB</th>
+                            <th>CE-Comp</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>1.5B Base</td><td>43.37</td><td>39.61</td><td>74.93</td><td>26.20</td><td>37.87</td></tr>
+                          <tr><td>1.5B Inst.</td><td>61.94 (+42.24%)</td><td>40.23 (+1.57%)</td><td>67.38 (-10.08%)</td><td>29.60 (+12.98%)</td><td>48.73 (+28.68%)</td></tr>
+                          <tr><td>7B Base</td><td>70.95</td><td>47.95</td><td>79.94</td><td>39.74</td><td>35.85</td></tr>
+                          <tr><td>7B Inst.</td><td>61.86 (-12.81%)</td><td>46.35 (-3.33%)</td><td>74.93 (-6.29%)</td><td>46.50 (+17.01%)</td><td>58.33 (+62.71%)</td></tr>
+                          <tr><td>14B Base</td><td>73.28</td><td>62.89</td><td>82.48</td><td>51.80</td><td>36.11</td></tr>
+                          <tr><td>14B Inst.</td><td>54.89 (-25.10%)</td><td>55.31 (-12.06%)</td><td>78.84 (-4.41%)</td><td>57.50 (+11.00%)</td><td>63.63 (+76.21%)</td></tr>
+                          <tr><td>32B Base</td><td>72.99</td><td>69.70</td><td>84.16</td><td>54.60</td><td>54.79</td></tr>
+                          <tr><td>32B Inst.</td><td>70.28 (-3.71%)</td><td>57.38 (-17.67%)</td><td>80.09 (-4.84%)</td><td>59.90 (+9.71%)</td><td>59.59 (+8.76%)</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="table-card">
+                    <h4>DeepSeek-Coder (RQ1)</h4>
+                    <div class="table-wrap">
+                      <table class="results-table">
+                        <thead>
+                          <tr>
+                            <th>Model</th>
+                            <th>HEFIM</th>
+                            <th>SAFIM</th>
+                            <th>CE-Inf</th>
+                            <th>BCB</th>
+                            <th>CE-Comp</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>1.3B Base</td><td>61.96</td><td>47.47</td><td>72.86</td><td>27.20</td><td>30.30</td></tr>
+                          <tr><td>1.3B Inst.</td><td>24.10 (-61.10%)</td><td>26.82 (-20.38%)</td><td>70.90 (-2.69%)</td><td>28.30 (+4.04%)</td><td>36.62 (+20.86%)</td></tr>
+                          <tr><td>6.7B Base</td><td>67.76</td><td>60.32</td><td>78.29</td><td>38.50</td><td>47.47</td></tr>
+                          <tr><td>6.7B Inst.</td><td>46.95 (-30.71%)</td><td>23.57 (-60.93%)</td><td>77.51 (-1.00%)</td><td>41.10 (+6.75%)</td><td>57.82 (+21.80%)</td></tr>
+                          <tr><td>33B Base</td><td>67.95</td><td>64.26</td><td>79.90</td><td>47.00</td><td>56.56</td></tr>
+                          <tr><td>33B Inst.</td><td>70.57 (+3.86%)</td><td>11.02 (-82.86%)</td><td>79.47 (-0.54%)</td><td>49.40 (+5.11%)</td><td>60.35 (+6.70%)</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="finding-card">
+              <summary>
+                <div class="finding-summary-main">
+                  <p class="finding-label">Finding 2</p>
+                  <h3>
+                    Instruct models generally perform better with guidance, but they
+                    improve on natural-language cues at the expense of code infilling.
+                  </h3>
+                  <p>
+                    The contrast is especially visible in ClassEval: completion tasks
+                    include to-do descriptions or docstrings, while infilling tasks
+                    require a precise local insertion inside existing code.
+                  </p>
+                </div>
+                <span class="toggle-chip"></span>
+              </summary>
+              <div class="finding-body">
+                <div class="two-column align-start">
+                  <figure class="paper-figure compact-figure">
+                    <div class="pdf-frame pdf-frame-medium">
+                      <a
+                        class="figure-link"
+                        href="./assets/figures/task-formulation.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src="./assets/figures/png/task-formulation.png"
+                          alt="Task formulation figure distinguishing infilling, completion, and instruction following."
+                          class="figure-image"
+                        />
+                      </a>
+                    </div>
+                    <figcaption>
+                      The paper's task formulation distinguishes suffix-constrained
+                      infilling from guidance-heavy completion and instruction
+                      following.
+                    </figcaption>
+                  </figure>
+                  <div class="stat-card">
+                    <h4>Why completion and infilling diverge</h4>
+                    <ul class="evidence-list">
+                      <li>Completion tasks embed natural-language guidance in comments or docstrings.</li>
+                      <li>Infilling tasks require the model to stay within a local hole defined by prefix and suffix context.</li>
+                      <li>Instruct variants often improve on ClassEval-Completion while degrading on ClassEval-Infilling.</li>
+                      <li>This suggests stronger dependence on natural-language cues, but weaker local insertion discipline.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="finding-card">
+              <summary>
+                <div class="finding-summary-main">
+                  <p class="finding-label">Finding 3</p>
+                  <h3>
+                    There is no guarantee of eliminating the instruction-tuning tax
+                    with increasing model size.
+                  </h3>
+                  <p>
+                    The effect of size is model-specific. Qwen shows consistent
+                    base-vs-instruct differences across many settings, while DeepSeek
+                    becomes less consistent on some benchmarks but remains highly
+                    degraded on structured infilling.
+                  </p>
+                </div>
+                <span class="toggle-chip"></span>
+              </summary>
+              <div class="finding-body">
+                <div class="table-card">
+                  <h4>Representative statistical evidence from the paper</h4>
+                  <div class="table-wrap">
+                    <table class="results-table compact-table">
+                      <thead>
+                        <tr>
+                          <th>Model family</th>
+                          <th>Representative evidence</th>
+                          <th>Interpretation</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Qwen2.5-Coder</td>
+                          <td>For 7B, McNemar significance appears across HEFIM, SAFIM, CE-Inf, CE-Comp, and BCB.</td>
+                          <td>Instruction tuning induces a stable behavioral shift.</td>
+                        </tr>
+                        <tr>
+                          <td>DeepSeek-Coder</td>
+                          <td>For 6.7B, CE-Inf and BCB are not significant, while SAFIM remains strongly significant.</td>
+                          <td>The tax weakens on some tasks but persists on structured infilling.</td>
+                        </tr>
+                        <tr>
+                          <td>Across sizes</td>
+                          <td>Larger models still show infilling degradation; 33B DeepSeek improves on HEFIM but collapses on SAFIM.</td>
+                          <td>Scaling alone does not remove the trade-off.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="finding-card">
+              <summary>
+                <div class="finding-summary-main">
+                  <p class="finding-label">Finding 4</p>
+                  <h3>
+                    Base and instruction-tuned models share substantial overlap, but
+                    their exclusive successes differ by task.
+                  </h3>
+                  <p>
+                    Base models exclusively solve more fill-in-the-middle problems,
+                    whereas instruction-tuned models exclusively solve more completion
+                    problems.
+                  </p>
+                </div>
+                <span class="toggle-chip"></span>
+              </summary>
+              <div class="finding-body">
+                <figure class="paper-figure">
+                  <div class="pdf-frame pdf-frame-wide">
+                    <a
+                      class="figure-link"
+                      href="./assets/figures/VennDiagram.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <img
+                        src="./assets/figures/png/VennDiagram.png"
+                        alt="Venn diagram comparing overlapping and exclusive successes for Base and Instruct models."
+                        class="figure-image"
+                      />
+                    </a>
+                  </div>
+                  <figcaption>
+                    The paper compares overlap and exclusive successes for matched
+                    Base and Instruct variants in Qwen2.5-Coder and DeepSeek-Coder.
+                  </figcaption>
+                </figure>
+              </div>
+            </details>
+
+            <details class="finding-card">
+              <summary>
+                <div class="finding-summary-main">
+                  <p class="finding-label">Finding 5</p>
+                  <h3>
+                    Manual failure analysis shows that most failures remain functional
+                    mismatches, but instruction tuning shifts more errors toward
+                    verbosity-related modes.
+                  </h3>
+                  <p>
+                    After instruction tuning, failures are more likely to include
+                    extra or redundant code and irrelevant natural language.
+                  </p>
+                </div>
+                <span class="toggle-chip"></span>
+              </summary>
+              <div class="finding-body">
+                <div class="two-column align-start">
+                  <figure class="paper-figure compact-figure">
+                    <div class="pdf-frame pdf-frame-medium">
+                      <a
+                        class="figure-link"
+                        href="./assets/figures/sample-categories.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src="./assets/figures/png/sample-categories.png"
+                          alt="Representative failure categories used in the manual analysis."
+                          class="figure-image"
+                        />
+                      </a>
+                    </div>
+                    <figcaption>
+                      Representative failure categories used in the manual analysis.
+                    </figcaption>
+                  </figure>
+                  <div class="stat-card">
+                    <h4>Selected shifts from the manual analysis</h4>
+                    <ul class="evidence-list">
+                      <li>HumanEval Infilling, Qwen2.5-Coder-7B: redundant-code failures rise from 10% to 48%.</li>
+                      <li>HumanEval Infilling, DeepSeek-Coder-6.7B: redundant-code failures rise from 42% to 94%.</li>
+                      <li>ClassEval Completion, Qwen2.5-Coder-7B: redundant-code failures rise from 6% to 48%.</li>
+                      <li>ClassEval Completion, DeepSeek-Coder-6.7B: redundant-code failures rise from 34% to 98%.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="finding-card">
+              <summary>
+                <div class="finding-summary-main">
+                  <p class="finding-label">Finding 6</p>
+                  <h3>
+                    The behavioral metrics show that the verbosity trend is
+                    systematic across outputs.
+                  </h3>
+                  <p>
+                    Instruction-tuned models are more likely to introduce natural
+                    language or unnecessary definitions/classes, especially in weakly
+                    constrained completion tasks.
+                  </p>
+                </div>
+                <span class="toggle-chip"></span>
+              </summary>
+              <div class="finding-body">
+                <div id="behavior-grid" class="behavior-grid" aria-live="polite"></div>
+                <p class="mini-note">
+                  The summaries above report average Instruct-minus-Base shifts for
+                  each family using the RQ2 weighted metrics written to
+                  <code>results/rq2_table7.json</code>.
+                </p>
+              </div>
+            </details>
+
+            <details class="finding-card">
+              <summary>
+                <div class="finding-summary-main">
+                  <p class="finding-label">Finding 7</p>
+                  <h3>
+                    Instruction tuning affects capabilities unevenly across
+                    benchmarks, and later tuning stages reallocate capability rather
+                    than uniformly improving all forms of code generation.
+                  </h3>
+                  <p>
+                    Instruction-following ability improves, completion remains
+                    positive on average but weakens in later stages, and infilling
+                    declines across the replicated tuning trajectory.
+                  </p>
+                </div>
+                <span class="toggle-chip"></span>
+              </summary>
+              <div class="finding-body">
+                <div class="two-column align-start">
+                  <figure class="paper-figure compact-figure">
+                    <div class="pdf-frame pdf-frame-medium">
+                      <a
+                        class="figure-link"
+                        href="./assets/figures/qwen_intermediate_checkpoints.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src="./assets/figures/png/qwen_intermediate_checkpoints.png"
+                          alt="Intermediate checkpoint behavior across the replicated Qwen tuning trajectory."
+                          class="figure-image"
+                        />
+                      </a>
+                    </div>
+                    <figcaption>
+                      Intermediate-checkpoint behavior during the replicated
+                      Qwen2.5-Coder-7B tuning trajectory.
+                    </figcaption>
+                  </figure>
+                  <div class="table-card">
+                    <h4>Stage-level grouped averages</h4>
+                    <div class="table-wrap">
+                      <table class="results-table compact-table">
+                        <thead>
+                          <tr>
+                            <th>Stage</th>
+                            <th>Infilling Avg.</th>
+                            <th>Infilling Delta</th>
+                            <th>Instruction Avg.</th>
+                            <th>Instruction Delta</th>
+                            <th>Completion Avg.</th>
+                            <th>Completion Delta</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Base</td>
+                            <td>66.10</td>
+                            <td>0.00%</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>42.98</td>
+                            <td>0.00%</td>
+                          </tr>
+                          <tr>
+                            <td>75k</td>
+                            <td>64.80</td>
+                            <td>-1.97%</td>
+                            <td>51.19</td>
+                            <td>0.00%</td>
+                            <td>45.93</td>
+                            <td>+6.86%</td>
+                          </tr>
+                          <tr>
+                            <td>110k</td>
+                            <td>64.61</td>
+                            <td>-2.25%</td>
+                            <td>57.17</td>
+                            <td>+11.68%</td>
+                            <td>44.11</td>
+                            <td>+2.65%</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="discussion" class="section">
+        <div class="container">
+          <h2 class="section-title">Discussion and Implications</h2>
+          <div class="two-column">
+            <div class="text-panel">
+              <h3>For researchers</h3>
+              <ul class="discussion-list">
+                <li>
+                  Instruction-tuning tax is not uniform across model families, which
+                  suggests model-specific interactions between architecture,
+                  pretraining, and post-training.
+                </li>
+                <li>
+                  Robust post-training should preserve concise, boundary-aware
+                  continuation for flow-mode tasks such as infilling.
+                </li>
+                <li>
+                  Behavior metrics are important because the trade-off is visible in
+                  how models fail, not only in whether they pass.
+                </li>
+              </ul>
+            </div>
+            <div class="text-panel">
+              <h3>For practitioners</h3>
+              <ul class="discussion-list">
+                <li>
+                  Model selection should be guided by deployment mode, not by one
+                  aggregate score.
+                </li>
+                <li>
+                  Safeguards should target dominant failure modes such as verbosity,
+                  natural-language leakage, and unnecessary declarations.
+                </li>
+                <li>
+                  Routing flow-oriented and command-oriented tasks differently may be
+                  more effective than treating instruction tuning as a universal
+                  upgrade.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="citation" class="section section-subtle">
+        <div class="container narrow">
+          <h2 class="section-title">Citation</h2>
+          <p class="section-intro">
+            Replace the venue and arXiv metadata below once the final bibliographic
+            record is available.
+          </p>
+          <div class="bibtex-card">
             <pre><code>@article{chang2026codetalkers,
   title   = {Lost in the Flow with Code Talkers: Unveiling the Instruction-Tuning Tax of Large Language Models in Code Tasks},
   author  = {Chang Shi Ying and Chiok Yew Ho and Yichen Li and Yintong Huo},
-  journal = {Manuscript submitted to ACM},
-  year    = {2026}
+  journal = {TBD},
+  year    = {2026},
+  note    = {arXiv link to be added}
 }</code></pre>
-          </article>
-          <article class="resource-card">
-            <h3>GitHub Pages setup</h3>
-            <ol>
-              <li>Push this <code>docs/</code> folder to the repository.</li>
-              <li>Open GitHub repository settings.</li>
-              <li>Select <code>Pages</code>.</li>
-              <li>Deploy from branch: <code>main</code> / <code>docs</code>.</li>
-            </ol>
-          </article>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <p>
-        Built as a no-build static site for GitHub Pages, centered on the manuscript
-        rather than the reproduction scripts.
-      </p>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>
+          Page structure inspired by academic project page conventions and findings
+          presentation inspired by the TimeWarp project page.
+        </p>
+      </div>
     </footer>
 
     <script src="./app.js"></script>
